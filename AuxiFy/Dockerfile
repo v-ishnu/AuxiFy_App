@@ -2,7 +2,7 @@
 FROM node:20.18.0
 
 # Set the working directory inside the container
-WORKDIR /AuxiFy/
+WORKDIR /app
 
 # Copy package.json and package-lock.json
 COPY package.json ./
