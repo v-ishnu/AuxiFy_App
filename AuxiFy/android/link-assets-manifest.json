@@ -1,0 +1,77 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "assets/fonts/Museo.ttf",
+      "sha1": "a6d494bff0cd33bc158ec368874740156dfd8dc5"
+    },
+    {
+      "path": "assets/fonts/MuseoModerno-Black.ttf",
+      "sha1": "88f4d28dc2588962179f658e2c2466c3f275d7be"
+    },
+    {
+      "path": "assets/fonts/MuseoModerno-BlackItalic.ttf",
+      "sha1": "748e57d8dc1e582a86cad5f1269ac454d77241cd"
+    },
+    {
+      "path": "assets/fonts/MuseoModerno-BoldItalic.ttf",
+      "sha1": "d479c0836acf34db8c593d1e9fd9580546afd5da"
+    },
+    {
+      "path": "assets/fonts/MuseoModerno-ExtraBold.ttf",
+      "sha1": "2a0bdaa355e550f9643e4d70fa155597ca699013"
+    },
+    {
+      "path": "assets/fonts/MuseoModerno-ExtraBoldItalic.ttf",
+      "sha1": "2325eefd54dc1fefe2301e8a854ad97515510473"
+    },
+    {
+      "path": "assets/fonts/MuseoModerno-ExtraLight.ttf",
+      "sha1": "9b77fee3b57d88fbab7b45a193fd2b3a5687d21f"
+    },
+    {
+      "path": "assets/fonts/MuseoModerno-ExtraLightItalic.ttf",
+      "sha1": "115228a485125f8fad5ee155095e22d377e5b9c8"
+    },
+    {
+      "path": "assets/fonts/MuseoModerno-Italic.ttf",
+      "sha1": "c47a1c4e850b6e7b029e801e2b0b291440162033"
+    },
+    {
+      "path": "assets/fonts/MuseoModerno-Light.ttf",
+      "sha1": "ea9dd57f0d1da135d2219f1b56b8b37642a098f9"
+    },
+    {
+      "path": "assets/fonts/MuseoModerno-LightItalic.ttf",
+      "sha1": "8f19231714b3dfa24148281e24eff1e8c84df226"
+    },
+    {
+      "path": "assets/fonts/MuseoModerno-Medium.ttf",
+      "sha1": "553c2dea27466e39adc652fce5cfbdff3b0af262"
+    },
+    {
+      "path": "assets/fonts/MuseoModerno-MediumItalic.ttf",
+      "sha1": "2a0994313508c066009068cf4f9370ac007b88b9"
+    },
+    {
+      "path": "assets/fonts/MuseoModerno-Regular.ttf",
+      "sha1": "3195c6967ad6dc3746cfc8532db3ccb90205af4f"
+    },
+    {
+      "path": "assets/fonts/MuseoModerno-SemiBold.ttf",
+      "sha1": "8e5c32166275ed95b059a0c9db0a634a5943838b"
+    },
+    {
+      "path": "assets/fonts/MuseoModerno-SemiBoldItalic.ttf",
+      "sha1": "75435ca31cb096106728816bfb109e91133f6d24"
+    },
+    {
+      "path": "assets/fonts/MuseoModerno-Thin.ttf",
+      "sha1": "0b258e8bab5a59118d8fc680e0371d86f983dc10"
+    },
+    {
+      "path": "assets/fonts/MuseoModerno-ThinItalic.ttf",
+      "sha1": "44a802a9318dd3809fcf0adf77268dea6e4ec6ee"
+    }
+  ]
+}
