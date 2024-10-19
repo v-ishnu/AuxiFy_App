@@ -1,3 +1,5 @@
 AuxiFy/node_modules/
 BACKEND/node_modules/
 .gitignore
+.vscode
+BACKEND/.env

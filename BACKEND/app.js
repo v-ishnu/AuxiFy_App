@@ -4,13 +4,14 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const jwt =require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+require('dotenv').config();
 
 app.use(cors());
 app.use(express.json());
 
-const mongoUrl = "mongodb+srv://vishnuprakash572:HjN3M3n6xwelC3BX@auxify.caita.mongodb.net/?retryWrites=true&w=majority&appName=AuxiFy";
+const mongoUrl = process.env.mongoURL;
 
-const JWT_SECRET = "hvdvay6ert72839289()aiyg8t87qt72393293883uhefiuh78ttq3ifi78272jdsds039[]]pou89ywe";
+const JWT_SECRET = process.env.JWT_SECRET_KEY;
 
 //  Configure DB
 mongoose.connect(mongoUrl).then(() => {
@@ -92,6 +93,6 @@ app.post("/userdata", async (req, res) => {
 
 
 
-app.listen(38345, () => {
+app.listen(process.env.PORT, () => {
     console.log('App is Running');
 });
