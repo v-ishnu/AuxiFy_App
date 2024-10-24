@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, StatusBar } from 'react-native';
 import Lottie from 'lottie-react-native';
 
 const SplashScreen = ({ navigation }) => {
@@ -13,6 +13,7 @@ const SplashScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
+      <StatusBar style={{backgroundColor:"transparent"}}/>
       <Lottie
         source={require('../assets/Splash/Animation-1727781523173.json')}
         autoPlay

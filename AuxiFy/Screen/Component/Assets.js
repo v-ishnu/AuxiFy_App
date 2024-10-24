@@ -20,6 +20,7 @@ import MusicBarIcon from '../../assets/Icon/musicbars.svg';
 import GoogleIcon from "../../assets/Icon/google.svg";
 import SpotifyIcon from "../../assets/Icon/spotify.svg";
 import AppleIcon from "../../assets/Icon/apple.svg";
+import PreLoader from "../../assets/pre.svg";
 
 
 
@@ -38,7 +39,7 @@ import SettingScreen from '../Profile/Setting/Setting';
 import AboutScreen from '../Profile/Setting/About';
 import SignUp from '../Auth/SignUp';
 import LoginScreen from '../Auth/LoginScreen';
-
+import ProfileEdit from '../Profile/ProfileEdit';
 
 
 // Logo
@@ -52,5 +53,5 @@ import {Dimensions} from 'react-native';
 
 const { width: ScreenW, height: ScreenH } = Dimensions.get('window');
 
-export {BackIcon, MoreIcon, FavIcon, ShuffleIcon, PrevIcon, PauIcon, PlayIcon, NexIcon, RepeatIcon, SearchIcon, logo,UserIcon,DevIcon,SignupScreen,SplashScreen,OnboardingScreen, NavBar, PlayScreen, Dev, Profile, LibraryScreen, DevImage, Stack, ScreenW, ScreenH, SettingIcon, SettingScreen, HomeScreen,VolIcon, LockIcon,NotifiIcon,InfoIcon, AboutScreen, LinkIcon, MusicBarIcon, SignUp, React, useState, useEffect,GoogleIcon, SpotifyIcon, AppleIcon, SignUpInScreen, LoginScreen,
+export {BackIcon, MoreIcon, FavIcon, ShuffleIcon, PrevIcon, PauIcon, PlayIcon, NexIcon, RepeatIcon, SearchIcon, logo,UserIcon,DevIcon, ProfileEdit, SignupScreen,SplashScreen,OnboardingScreen, NavBar, PlayScreen, Dev, Profile, LibraryScreen, DevImage, Stack, ScreenW, ScreenH, SettingIcon, SettingScreen, HomeScreen,VolIcon, LockIcon,NotifiIcon,InfoIcon, AboutScreen, LinkIcon, MusicBarIcon, SignUp, React, useState, useEffect,GoogleIcon, SpotifyIcon, AppleIcon, SignUpInScreen, LoginScreen,
 }

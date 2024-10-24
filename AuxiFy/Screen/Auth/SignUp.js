@@ -33,7 +33,7 @@ const SignUp =() =>{
           navigation.navigate('LoginScreen')
         }
 
-        axios.post("http://192.168.1.207:38345/register",userData)
+        axios.post("https://auxify-app.onrender.com/register",userData)
         .then(res=> console.log(res.data))
         .catch(e => console.log(e));      
         
@@ -62,12 +62,12 @@ const SignUp =() =>{
 
 
                     {/* email */}
-                    <TextInput style={{ height: 50, width:ScreenW*0.87,borderColor: '#ccc', borderWidth: 1, borderRadius: 5, marginBottom: 15, paddingHorizontal: 10, borderRadius:19, borderColor:'grey', paddingHorizontal:20 }} placeholder="Email" value={email} onChangeText={setEmail}/>
+                    <TextInput keyboardType='email' style={{ height: 50, width:ScreenW*0.87,borderColor: '#ccc', borderWidth: 1, borderRadius: 5, marginBottom: 15, paddingHorizontal: 10, borderRadius:19, borderColor:'grey', paddingHorizontal:20 }} placeholder="Email" value={email} onChangeText={setEmail}/>
 
 
 
                     {/* Mobile */}
-                    <TextInput style={{ height: 50, width:ScreenW*0.87,borderColor: '#ccc', borderWidth: 1, borderRadius: 5, marginBottom: 15, paddingHorizontal: 10, borderRadius:19, borderColor:'grey', paddingHorizontal:20 }} placeholder="Mobile No." value={mobile} onChangeText={setMobile}/>
+                    <TextInput keyboardType='numeric' style={{ height: 50, width:ScreenW*0.87,borderColor: '#ccc', borderWidth: 1, borderRadius: 5, marginBottom: 15, paddingHorizontal: 10, borderRadius:19, borderColor:'grey', paddingHorizontal:20 }} placeholder="Mobile No." value={mobile} onChangeText={setMobile}/>
 
 
 

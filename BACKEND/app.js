@@ -4,24 +4,23 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const jwt =require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+
+const userOTPverification = require("./models/userOTPverification");
 require('dotenv').config();
+
 
 app.use(cors());
 app.use(express.json());
 
-const mongoUrl = process.env.mongoURL;
-
-const JWT_SECRET = process.env.JWT_SECRET_KEY;
-
 //  Configure DB
-mongoose.connect(mongoUrl).then(() => {
+mongoose.connect(process.env.mongoURL).then(() => {
     console.log(`Database Connected: ✅ Successfully`);
 }).catch((e) => {
     console.log(e);
 });
 
 // Import User model
-require('./appUserDetails');
+require('./models/appUserDetails');
 const User = mongoose.model("UserInfo");
 
 // Basic health check route
@@ -40,7 +39,7 @@ app.post("/login", async(req, res)=>{
     }
 
     if (await bcrypt.compare(password,oldUser.password)){
-        const token=jwt.sign({email:oldUser.email}, JWT_SECRET);
+        const token=jwt.sign({email:oldUser.email}, process.env.JWT_SECRET_KEY);
 
         if (res.status(201)){
             return res.send({status:"ok", data:token})
@@ -75,6 +74,9 @@ app.post('/register', async (req, res) => {
 });
 
 
+// 
+
+
 
 // User Data
 app.post("/userdata", async (req, res) => {
@@ -93,6 +95,6 @@ app.post("/userdata", async (req, res) => {
 
 
 
-app.listen(process.env.PORT, () => {
+app.listen(38345,() => {
     console.log('App is Running');
 });

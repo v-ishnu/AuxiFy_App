@@ -3,3 +3,4 @@ BACKEND/node_modules/
 .gitignore
 .vscode
 BACKEND/.env
+node_modules

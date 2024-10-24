@@ -16,36 +16,71 @@ const logo = require('../../assets/AppImage/logo4.png');
 const SignupScreen = () => {
     const navigation = useNavigation();
 
-    async function authenticate() {
-        const config = {
-            issuer: "https://accounts.spotify.com",
-            clientId: "49acc7ca57a44bcca2d74638978e1b71",
-            scopes: [
-                "user-read-email",
-                "user-library-read",
-                "user-read-recently-played",
-                "user-top-read",
-                "playlist-read-private",
-                "playlist-read-collaborative",
-                "playlist-modify-public" // or "playlist-modify-private"
-            ],
-            redirectUrl: "https://v-ishnu.github.io/Sahayak/403.html"
-        };
-
-        try {
-            const result = await authorize(config);
-            console.log(result);
-
-            if (result.accessToken) {
-                const expirationDate = new Date(result.accessTokenExpirationDate).getTime();
-                await AsyncStorage.setItem("token", result.accessToken);
-                await AsyncStorage.setItem("expirationDate", expirationDate.toString());
-                navigation.navigate("AuxiFy");
+    // Spotify Registration
+    useEffect(() => {
+        const checkTokenValidity = async () => {
+          const accessToken = await AsyncStorage.getItem('token');
+          const expirationDate = await AsyncStorage.getItem('expirationDate');
+          console.log('Access Token:', accessToken);
+          console.log('Expiration Date:', expirationDate);
+    
+          if (accessToken && expirationDate) {
+            const currentTime = Date.now();
+            if (currentTime < parseInt(expirationDate)) {
+              navigation.replace('AuxiFy'); // Token is still valid
+            } else {
+              // Token is expired, clear it
+              await AsyncStorage.removeItem('token');
+              await AsyncStorage.removeItem('expirationDate');
             }
+          }
+        };
+        checkTokenValidity();
+      }, []);
+      
+      async function authenticate() {
+        const config = {
+          issuer: 'https://accounts.spotify.com',
+          clientId: '49acc7ca57a44bcca2d74638978e1b71',
+          redirectUrl: 'com.auxify://callback',
+          scopes: [
+            'user-read-email',
+            'user-library-read',
+            'user-read-recently-played',
+            'user-top-read',
+            'playlist-read-private',
+            'playlist-read-collaborative',
+            'playlist-modify-public', // or "playlist-modify-private"
+          ],
+        };
+      
+        try {
+          const result = await authorize(config);
+          console.log('Spotify Auth Result:', result);  // Log the result for debugging
+      
+          if (result.accessToken) {
+            const expirationDate = result.accessTokenExpirationDate 
+              ? new Date(result.accessTokenExpirationDate).getTime()
+              : Date.now() + 3600 * 1000;
+      
+            if (expirationDate) {
+              await AsyncStorage.setItem('token', result.accessToken);
+              await AsyncStorage.setItem('expirationDate', expirationDate.toString());
+            } else {
+              console.warn('No expiration date in the response');
+              await AsyncStorage.setItem('token', result.accessToken);
+            }
+      
+            navigation.navigate('AuxiFy');
+          }
         } catch (error) {
-            console.error('Authentication error:', error);
+          console.error('Authentication Error:', error);
         }
-    }
+      }
+
+
+    //   Phone Auth
+
 
     return (
         <View style={styles.container}>

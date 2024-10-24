@@ -1,20 +1,24 @@
 import React from 'react';
 import { View, Pressable, Text, StyleSheet, Dimensions, TouchableOpacity, Image } from 'react-native';
-import {Dev} from '../Component/Assets';
+import {Dev, Profile_edit} from '../Component/Assets';
 import { useNavigation } from '@react-navigation/native'; 
 
 import {DevImage, BackIcon, UserIcon, DevIcon ,SettingIcon} from '../Component/Assets'
 
 
-
 const { width: ScreenW, height: ScreenH } = Dimensions.get('window');
 
 
-const Profile = () => {
-    const navigation = useNavigation();
 
+const Profile = ({route}) => {
+    const {userData} = route.params;
+    const {loginType} = route.params;
+    const {playlists} = route.params;
+    const navigation = useNavigation();
     return (
         <View style={{backgroundColor:'#1C1B1B', height:'100%'}}>
+
+            
             {/* User Details */}
             <View style={{flexDirection:'column',height:ScreenH*0.38, backgroundColor: '#2C2B2B', borderBottomLeftRadius:66, borderBottomRightRadius:66}}>
                 {/* App Bar */}
@@ -25,13 +29,17 @@ const Profile = () => {
 
                 {/* User Profile */}
                 <View style={{width:ScreenW, alignItems:'center', paddingVertical:ScreenH*0.02}}>
-                    <Image source={DevImage} style={{width:62, height:62, borderRadius:35, alignItems:'center', justifyContent:'center'}}/>
+                    {userData?.images && userData.images.length > 0 && userData.images[0]?.url ? (
+                        <Image source={{ uri: userData.images[0].url }} style={{ width: 62, height: 62, borderRadius: 35, alignItems: 'center', justifyContent: 'center' }} />
+                    ) : (
+                        <Image source={DevImage} style={{ width: 62, height: 62, borderRadius: 35, alignItems: 'center', justifyContent: 'center' }}/>
+                    )}
                 </View>
 
                 {/* User Name */}
                 <View style={{alignItems:'center', marginBottom:40}}>
-                    <Text style={{fontStyle:'italic', fontSize:ScreenW*0.03, marginBottom:5}}>vishnuprakash572@gmail.com</Text>
-                    <Text style={{fontSize:ScreenW*0.05, fontWeight:'bold', color:'white'}}>Vishnu Prakash</Text>
+                    <Text style={{fontStyle:'italic', fontSize:ScreenW*0.03, marginBottom:5}}>{loginType == 'MongoDB' ? userData?.email : userData.email}</Text>
+                    <Text style={{fontSize:ScreenW*0.05, fontWeight:'bold', color:'white'}}>{loginType == 'Spotify' ? userData?.display_name : userData.name}</Text>
                 </View>
 
                 {/* Follower */}
@@ -61,7 +69,10 @@ const Profile = () => {
                 <View style={{width:'100%'}}>
 
                     {/* My Profile */}
-                    <Pressable style={{ flexDirection: 'row', alignItems:'center', justifyContent:'space-between', paddingHorizontal: 30}} onPress={() => navigation.navigate('Dev')}>
+                    <Pressable style={{ flexDirection: 'row', alignItems:'center', justifyContent:'space-between', paddingHorizontal: 30}} onPress={() => {
+                        navigation.navigate('ProfileEdit', { userData });
+                    }}>
+                        
                                 
                         {/* Icon */}
                         <View style={{width: 50, height: 50, borderRadius:17 ,backgroundColor:'#E9E9FF', alignItems:'center', justifyContent:'center'}}>

@@ -22,13 +22,14 @@ const LoginScreen =()=> {
         }
 
         axios
-        .post("http://192.168.1.207:38345/login", userData)
+        .post("https://auxify-app.onrender.com/login", userData)
         .then(res => {
             console.log(res.data);
             if (res.data.status === 'ok') {
                 Alert.alert("Logged in Successfully");
                 AsyncStorage.setItem("token", res.data.data)
-                navigation.navigate('AuxiFy');  // Ensure navigation is available
+                AsyncStorage.setItem("keepLoggedIn", JSON.stringify(true))
+                navigation.navigate('AuxiFy');
             } else {
                 Alert.alert("Login failed. Please try again.");
             }
