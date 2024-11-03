@@ -23,7 +23,12 @@ import ProgressBar from '../Component/progressIndicator';
 import { transform } from 'typescript';
 import { Pressable } from 'react-native-gesture-handler';
 
-const PlayScreen = () => {
+const PlayScreen = ({route}) => {
+
+    const { recentlyPlayed } = route.params;
+
+    console.log("Recent Played", recentlyPlayed);
+
 
     const navigation = useNavigation();
     const [modalVisible, setModalVisible] = useState(false);

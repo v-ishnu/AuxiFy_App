@@ -1,5 +1,5 @@
 import React from "react";
-import { SafeAreaView, View, Text, Dimensions, TouchableWithoutFeedback, Image} from 'react-native';
+import { SafeAreaView, View, Text, Dimensions, TouchableWithoutFeedback, Image, TouchableOpacity} from 'react-native';
 import { ScreenH, ScreenW, BackIcon, SearchIcon, DevImage, PlayIcon  } from '../Component/Assets';
 import { TextInput } from "react-native-gesture-handler";
 
@@ -9,6 +9,7 @@ export default ProfileEdit = ({route, navigation }) => {
     return (
         <View style={{flex: 1, backgroundColor: '#1C1B1B', paddingVertical:40, paddingHorizontal:20, flexDirection:'column'}}>
             <View>
+                {/* AppBar */}
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width: ScreenW*0.5, zIndex:1}}>
                     {/* Back Icon */}
                     <TouchableWithoutFeedback onPress={() => navigation.goBack()}>
@@ -39,34 +40,12 @@ export default ProfileEdit = ({route, navigation }) => {
                                 ) : (
                                     <Image source={DevImage} style={{ width: 75, height: 75, borderRadius: 35, alignItems: 'center', justifyContent: 'center' }}/>
                                 )}
-                                <TouchableWithoutFeedback style={{position: 'absolute',backgroundColor: '#2C2C2C', borderRadius: 30,justifyContent: 'flex-end',alignItems: 'center',width: 30, height: 30,bottom:0,right:10,zIndex:1,}}>
+                                <TouchableWithoutFeedback style={{position: 'absolute',backgroundColor: '#2C2C2C', borderRadius: 30,justifyContent: 'flex-end',alignItems: 'center',width: 30, height: 30,bottom:0,right:50,zIndex:1,}}>
                                     <PlayIcon width="20" height="20" fill='grey' color='grey'/>
                                 </TouchableWithoutFeedback>
                             </View>
                         </View>
                     </View>
-
-
-                    {/* Music Playlist */}
-                    <TouchableOpacity onPress={{}}>
-                        <View style={{flexDirection:'column',height:ScreenH*0.28, marginBottom:20}}>
-                            {/* Layout */}
-                            <View style={{width:ScreenW*0.38,height:ScreenH*0.24,borderRadius:30}}>
-                                <View style={{width:ScreenW*0.38,height:ScreenH*0.23,overflow: 'hidden',borderRadius:30}}>
-                                    {userData?.images && userData.images.length > 0 && userData.images[0]?.url ? (
-                                        <Image source={{ uri: userData.images[0].url }} style={{ width: 75, height: 75, borderRadius: 35, alignItems: 'center', justifyContent: 'center' }} />
-                                    ) : (
-                                        <Image source={DevImage} style={{ width: 75, height: 75, borderRadius: 35, alignItems: 'center', justifyContent: 'center' }}/>
-                                    )}
-                                </View>
-                                <TouchableOpacity style={{position: 'absolute',backgroundColor: '#2C2C2C', borderRadius: 30,justifyContent: 'center',alignItems: 'center',width: 30, height: 30,bottom:0,right:10,zIndex:1,}}>
-                                    <PlayIcon width="20" height="20" fill='grey' color='grey' style={styles.playIcon} />
-                                </TouchableOpacity>
-                            </View>
-                            <Text style={styles.topHitSong}>{truncateTitle(item.title)}</Text>
-                            <Text style={styles.topHitAuthor}>{item.author}</Text> 
-                        </View>
-                    </TouchableOpacity>
 
                     {/* User Id */}
                     <View style={{flexDirection: 'row', borderColor:'grey', borderWidth:1, width:ScreenW*0.89, paddingVertical:ScreenH*0.02, borderRadius:20,alignItems:'center' , paddingHorizontal: 20}}>

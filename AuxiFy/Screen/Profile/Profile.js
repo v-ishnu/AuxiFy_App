@@ -15,6 +15,8 @@ const Profile = ({route}) => {
     const {loginType} = route.params;
     const {playlists} = route.params;
     const navigation = useNavigation();
+
+    
     return (
         <View style={{backgroundColor:'#1C1B1B', height:'100%'}}>
 
@@ -39,7 +41,7 @@ const Profile = ({route}) => {
                 {/* User Name */}
                 <View style={{alignItems:'center', marginBottom:40}}>
                     <Text style={{fontStyle:'italic', fontSize:ScreenW*0.03, marginBottom:5}}>{loginType == 'MongoDB' ? userData?.email : userData.email}</Text>
-                    <Text style={{fontSize:ScreenW*0.05, fontWeight:'bold', color:'white'}}>{loginType == 'Spotify' ? userData?.display_name : userData.name}</Text>
+                    <Text style={{fontSize:ScreenW*0.05, fontWeight:'bold', color:'white'}}>{loginType == 'Spotify' ? userData?.display_name : name}</Text>
                 </View>
 
                 {/* Follower */}

@@ -12,7 +12,9 @@ import {
     Animated
 } from 'react-native';
 
-const NavBar = ({ navigation, state }) => {
+const NavBar = ({ navigation, state}) => {
+    
+
     const indicatorPosition = useRef(new Animated.Value(0)).current;
 
     const iconWidth = ScreenW * 0.86 / 4;
