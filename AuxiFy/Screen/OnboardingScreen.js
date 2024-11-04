@@ -8,25 +8,25 @@ const BgImage = require('../assets/AppImage/BGImage.jpg');
 const logo = require('../assets/AppImage/logo4.png');
 
 const OnboardingScreen = ({ navigation }) => {
-    // const [isFirstLaunch, setIsFirstLaunch] = useState(null);
+    const [isFirstLaunch, setIsFirstLaunch] = useState(null);
 
-    // useEffect(() => {
-    //     // Check if the user has visited onboarding before
-    //     const checkOnboardingStatus = async () => {
-    //         try {
-    //             const hasVisited = await AsyncStorage.getItem('hasVisitedOnboarding');
-    //             if (hasVisited === null) {
-    //                 setIsFirstLaunch(true);
-    //             } else {
-    //                 navigation.replace('AuxiFy'); 
-    //             }
-    //         } catch (error) {
-    //             console.log('Error checking onboarding status:', error);
-    //         }
-    //     };
+    useEffect(() => {
+        // Check if the user has visited onboarding before
+        const checkOnboardingStatus = async () => {
+            try {
+                const hasVisited = await AsyncStorage.getItem('hasVisitedOnboarding');
+                if (hasVisited === null) {
+                    setIsFirstLaunch(true);
+                } else {
+                    navigation.replace('AuxiFy'); 
+                }
+            } catch (error) {
+                console.log('Error checking onboarding status:', error);
+            }
+        };
 
-    //     checkOnboardingStatus();
-    // }, []);
+        checkOnboardingStatus();
+    }, []);
 
     // const handleGetStarted = async () => {
     //     try {
@@ -37,14 +37,14 @@ const OnboardingScreen = ({ navigation }) => {
     //     }
     // };
 
-    // if (isFirstLaunch === null) {
+    if (isFirstLaunch === null) {
         
-    //     return (
-    //         <View style={styles.loadingContainer}>
-    //             <Text style={styles.loadingText}>Loading...</Text>
-    //         </View>
-    //     );
-    // }
+        return (
+            <View style={{}}>
+                <Text style={styles.loadingText}>Loading...</Text>
+            </View>
+        );
+    }
 
     return (
         <ImageBackground

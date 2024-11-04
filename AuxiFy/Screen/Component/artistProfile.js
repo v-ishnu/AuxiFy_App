@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { View, Dimensions, Text, TouchableOpacity, ImageBackground, ScrollView, Image } from "react-native";
+import { View, Dimensions, Text, TouchableOpacity, ImageBackground, ScrollView, Image, StatusBar} from "react-native";
 import { useNavigation } from '@react-navigation/native';
-import { ScreenH, ScreenW, BackIcon, MoreIcon, LinkIcon, VerifiedIcon } from '../Component/Assets';
+import { ScreenH, ScreenW, BackIcon, MoreIcon, LinkIcon, VerifiedIcon } from './Assets';
 
 
 const BgImage = require('../../assets/AppImage/BGImage.jpg');
@@ -40,7 +40,7 @@ export default ArtistProfile = ({ route, navigation }) => {
 
         try {
             const response = await axios.get(
-                `https://api.spotify.com/v1/artists/${artistId}/albums`,
+                `https://api.spotify.com/v1/artists/${artistId}/albums?market="IN"`,
                 {
                     headers: {
                         Authorization: `Bearer ${accessToken}`,
@@ -62,17 +62,15 @@ export default ArtistProfile = ({ route, navigation }) => {
     return (
         <View style={{ backgroundColor: '#1C1B1B', height: '100%' }}>
             <View style={{ flexDirection: 'column', height: ScreenH * 0.33, backgroundColor: '#2C2B2B', borderBottomLeftRadius: 66, borderBottomRightRadius: 66 }}>
-
                 <ImageBackground
                     source={{ uri: artist.images[0].url }}
+                    resizeMode= 'cover'
                     style={{
                         width: '100%',
                         height: '100%',
-                        resizeMode: 'cover',
                         borderBottomLeftRadius: 66,
                         borderBottomRightRadius: 66,
                         overflow: 'hidden',
-
                     }}>
 
                     {/* App Bar */}
@@ -112,21 +110,7 @@ export default ArtistProfile = ({ route, navigation }) => {
                     <Text style={{alignItems:'center', textAlign:'center'}}>Helo</Text>
 
                     {/* Albums */}
-                    <ScrollView vertical showsVerticalScrollIndicator={false} style={{ paddingVertical: 5, marginBottom: ScreenH * 0.45 }} contentContainerStyle={{ flexGrow: 1 }} >
-                        <View>
-                            <Text style={{ color: 'white', fontSize: ScreenW * 0.05, fontWeight: 'bold', paddingLeft: 25, paddingBottom: 10 }}>Album</Text>
-                        </View>
-
-                        
-                        <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ paddingVertical: 2, paddingHorizontal: 20, }}>
-                            {artistAlbum.map(item => (
-                                <View key={item.id} style={{ width: 80, height:80}}>
-                                    <Image source={{ uri: item.album.images[0].url}} style={{ width: '100%', height: '100%', resizeMode: 'cover' }} />
-                                </View>
-                                
-                            ))}
-                        </ScrollView>
-                    </ScrollView>
+                    <Image source={{ uri: items.images[0].url}} style={{ width: '100%', height: '100%', resizeMode: 'cover' }} />
                 </View>
             </View>
         </View>

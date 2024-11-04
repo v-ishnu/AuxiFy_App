@@ -88,7 +88,7 @@ const PlayScreen = ({route}) => {
 
             {/* Thumbnail */}
             <View>
-                <Image source={require('../../assets/AppImage/BillieEilish.png')} style={styles.thumbnail}></Image>
+                <Image source={{uri: recentlyPlayed.item.images[0].url}} style={recentlyPlayed.thumbnail}></Image>
             </View>
 
 

@@ -57,13 +57,13 @@ const Home = ({route}) => {
 
 
 
-    // Your Top Mixed Song API
+    // Top Mix Song API
     const getTopmix = async () =>{
         const accessToken = await AsyncStorage.getItem('token');
         try {
           const response = await axios({
             method: 'GET',
-            url: 'https://api.spotify.com/v1/browse/new-releases',
+            url: 'https://api.spotify.com/v1/episodes?market=IN',
             headers: {
               Authorization: `Bearer ${accessToken}`, 
           },
@@ -80,13 +80,13 @@ const Home = ({route}) => {
     },[])
 
 
-    // Your Top Mixed  Song API
+    // New Song API
     const getNewRelease = async () =>{
         const accessToken = await AsyncStorage.getItem('token');
             try {
               const response = await axios({
                 method: 'GET',
-                url: 'https://api.spotify.com/v1/browse/new-releases?offset=0&limit=20',
+                url: 'https://api.spotify.com/v1/browse/new-releases?market="IN"',
                 headers: {
                   Authorization: `Bearer ${accessToken}`, 
               },
@@ -128,7 +128,9 @@ const Home = ({route}) => {
     }, [])
 
 
-
+    const playTrack = () => {
+        
+    }
 
 
     // AllUI =================================================================================================
@@ -198,7 +200,7 @@ const Home = ({route}) => {
             </View>
             
             <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{paddingVertical: 2, paddingHorizontal: 20,}}>
-                {topMixSongs.map(item => (
+                {newRelease.map(item => (
                     <TouchableOpacity key={item.id} style={styles.topHitItem} onPress={() => handleMenuPress(item.title)}>
                         <View style={styles.topHitContainer}>
                             <View style={styles.topHitLayout}>

@@ -42,7 +42,7 @@ import SignUp from '../Auth/SignUp';
 import LoginScreen from '../Auth/LoginScreen';
 import ProfileEdit from '../Profile/ProfileEdit';
 import RecentlyPlayed from '../HomeScreen/RecentlyPlayed';
-import ArtistProfile from '../Component/artistProfile';
+import ArtistProfile from './ArtistProfile';
 import PlayerContext from '../../PlayerContext';
 
 
