@@ -125,8 +125,9 @@ const Home = ({route}) => {
             }
         }
         getTopArtists();
-    }, [])
+    }, []) 
 
+    
 
     const playTrack = () => {
         
