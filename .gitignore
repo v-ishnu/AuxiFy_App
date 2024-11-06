@@ -4,3 +4,4 @@ BACKEND/node_modules/
 .vscode
 BACKEND/.env
 node_modules
+BACKEND

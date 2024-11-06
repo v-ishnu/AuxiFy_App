@@ -34,8 +34,8 @@ const Dev = () => {
                         <View style={{flexDirection:'row', alignItems:'center'}}>
                             <Image source={DevImage} style={{width:52, height:52, borderRadius: 25}} />
                             <View style={{flexDirection:'column', paddingHorizontal: 15}}>
-                                <Text style={{fontSize:22,fontWeight:'600'}}>Vishnu Prakash</Text>
-                                <Text style={{fontSize:14}}>Connect me on LinkedIn</Text>
+                                <Text style={{color:'white',fontSize:22,fontWeight:'600'}}>Vishnu Prakash</Text>
+                                <Text style={{fontSize:14,color:'white'}}>Connect me on LinkedIn</Text>
                             </View>
                         </View>
                     </TouchableOpacity>

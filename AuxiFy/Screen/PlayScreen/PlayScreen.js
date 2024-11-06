@@ -35,6 +35,7 @@ const PlayScreen = ({route}) => {
 
 
     return (
+        (recentlyPlayed &&
         <View style={styles.container}>
 
             {/* AppBar */}
@@ -48,7 +49,7 @@ const PlayScreen = ({route}) => {
                 </TouchableWithoutFeedback>
 
                 {/* Title */}
-                <Text style={styles.title}>$tITLE</Text>
+                <Text style={styles.title}>Happier than ever</Text>
 
                 {/* More Options Button */}
                 <TouchableWithoutFeedback style={styles.moreButn} onPress={() => setModalVisible(true)}>
@@ -88,7 +89,11 @@ const PlayScreen = ({route}) => {
 
             {/* Thumbnail */}
             <View>
-                <Image source={{uri: recentlyPlayed.item.images[0].url}} style={recentlyPlayed.thumbnail}></Image>
+                <Image source={require('../../assets/AppImage/BillieEilish.png')} 
+                    style={{width:ScreenW*0.89,
+                    height:ScreenH*0.55,
+                    backgroundColor:'green',
+                    borderRadius:30,}}></Image>
             </View>
 
 
@@ -96,8 +101,8 @@ const PlayScreen = ({route}) => {
             <View style={styles.playTitle}>
                 {/* Tilte */}
                 <View style={{flexDirection:'column'}}>
-                    <Text style={{fontWeight:'bold', fontSize: ScreenW*0.05}}>Helo</Text>
-                    <Text style={{fontSize: ScreenW*0.04}}>Helo</Text>
+                    <Text style={{fontWeight:'bold', fontSize: ScreenW*0.05, color:'white'}}>Happier than ever</Text>
+                    <Text style={{fontSize: ScreenW*0.04, color:'white'}}>Billie Eilish</Text>
                 </View>
                 {/* Favourite*/}
                 <FavIcon />
@@ -125,17 +130,13 @@ const PlayScreen = ({route}) => {
 
             <View>
             {/* Pressable to show/hide ScrollView */}
-            <Pressable
-                style={[styles.lyrics, { width: '60%' }]}
-                onPress={{}}>
-                <BackIcon style={[styles.lyricsIcon]} />
-                <Text style={styles.lyricsText}>Lyrics</Text>
-            </Pressable>
-</View>
-
-
-
+                <Pressable style={[styles.lyrics, { width: '60%' }]} onPress={{}}>
+                    <BackIcon style={[styles.lyricsIcon]} />
+                    <Text style={styles.lyricsText}>Lyrics</Text>
+                </Pressable>
+            </View>
         </View>
+        )
     );
 };
 
