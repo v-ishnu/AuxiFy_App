@@ -33,6 +33,8 @@ const PlayScreen = ({route}) => {
     const navigation = useNavigation();
     const [modalVisible, setModalVisible] = useState(false);
 
+    console.log("Recent Palayed Dta aon PlayScree:", recentlyPlayed)
+
 
     return (
         (recentlyPlayed &&
@@ -49,7 +51,7 @@ const PlayScreen = ({route}) => {
                 </TouchableWithoutFeedback>
 
                 {/* Title */}
-                <Text style={styles.title}>Happier than ever</Text>
+                <Text style={styles.title}>{recentlyPlayed.track.name}</Text>
 
                 {/* More Options Button */}
                 <TouchableWithoutFeedback style={styles.moreButn} onPress={() => setModalVisible(true)}>
@@ -59,27 +61,7 @@ const PlayScreen = ({route}) => {
                 </TouchableWithoutFeedback>
             </View>
 
-            <Modal
-                transparent={true}
-                visible={modalVisible}
-                animationType="slide"
-                onRequestClose={() => setModalVisible(false)}
-            >
-                <View style={styles.modalContainer}>
-                    <View style={styles.modalContent}>
-                        <Text style={styles.modalTitle}>More Options</Text>
-                        <TouchableWithoutFeedback onPress={() => console.log("Option 1 pressed!")}>
-                            <Text style={styles.modalOption}>Option 1</Text>
-                        </TouchableWithoutFeedback>
-                        <TouchableWithoutFeedback onPress={() => console.log("Option 2 pressed!")}>
-                            <Text style={styles.modalOption}>Option 2</Text>
-                        </TouchableWithoutFeedback>
-                        <TouchableWithoutFeedback onPress={() => setModalVisible(false)}>
-                            <Text style={styles.closeButton}>Close</Text>
-                        </TouchableWithoutFeedback>
-                    </View>
-                </View>
-            </Modal>
+        
 
 
             {/* Space */}
@@ -89,7 +71,7 @@ const PlayScreen = ({route}) => {
 
             {/* Thumbnail */}
             <View>
-                <Image source={require('../../assets/AppImage/BillieEilish.png')} 
+                <Image source={{ uri: recentlyPlayed.track.album.images[0].url }}
                     style={{width:ScreenW*0.89,
                     height:ScreenH*0.55,
                     backgroundColor:'green',
@@ -101,8 +83,8 @@ const PlayScreen = ({route}) => {
             <View style={styles.playTitle}>
                 {/* Tilte */}
                 <View style={{flexDirection:'column'}}>
-                    <Text style={{fontWeight:'bold', fontSize: ScreenW*0.05, color:'white'}}>Happier than ever</Text>
-                    <Text style={{fontSize: ScreenW*0.04, color:'white'}}>Billie Eilish</Text>
+                    <Text style={{fontWeight:'bold', fontSize: ScreenW*0.05, color:'white'}}>{recentlyPlayed.track.name}</Text>
+                    <Text style={{fontSize: ScreenW*0.04, color:'white'}}>{recentlyPlayed.track.artists[0].name}</Text>
                 </View>
                 {/* Favourite*/}
                 <FavIcon />

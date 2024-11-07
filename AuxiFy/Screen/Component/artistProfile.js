@@ -40,20 +40,22 @@ export default ArtistProfile = ({ route, navigation }) => {
 
         try {
             const response = await axios.get(
-                `https://api.spotify.com/v1/artists/${artistId}/albums?market="IN"`,
+                `https://api.spotify.com/v1/artists/${artistId}`,
                 {
                     headers: {
                         Authorization: `Bearer ${accessToken}`,
                     },
                 }
             );
-            const artistAlbum = response.data.items;
+            const artistAlbum = response.data;
             setArtistAlbum(artistAlbum);
             console.log("Artist Album after setting state:", artistAlbum); // Log after setting state
         } catch (err) {
             console.error("Error fetching artist albums:", err.message);
         }
     };
+
+    console.log("Artist Albums data=", artistAlbum)
 
     getArtistAlbum();
 }, [artistId]);
@@ -110,7 +112,7 @@ export default ArtistProfile = ({ route, navigation }) => {
                     <Text style={{alignItems:'center', textAlign:'center'}}>Helo</Text>
 
                     {/* Albums */}
-                    <Image source={{ uri: items.images[0].url}} style={{ width: '100%', height: '100%', resizeMode: 'cover' }} />
+                    
                 </View>
             </View>
         </View>

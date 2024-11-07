@@ -104,8 +104,6 @@ const AuxiFy = ({props}) => {
     getRecentlyPlayedSongs();
   },[])
 
-  // console.log('Received recentlyPlayed data in AppJS:', recentlyPlayed);
-
   return (
     <Tab.Navigator tabBar={(props) => <NavBar {...props} initialParams= {{recentlyPlayed, userData, loginType, }} />}>
       <Tab.Screen name="HomeScreen" component={HomeScreen} options={{ headerShown: false }} initialParams= {{recentlyPlayed, userData, loginType, }} />

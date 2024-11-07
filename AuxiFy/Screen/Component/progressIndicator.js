@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
   },
   timeText: {
     fontSize: 14,
-    color: '#333',
+    color: '#1DB954',
   },
   container: {
     height: 5,
