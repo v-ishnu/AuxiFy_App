@@ -4,6 +4,8 @@ import { useNavigation } from '@react-navigation/native';
 import { PlayIcon, FavIcon, MoreIcon, logo, SearchIcon, PlayerContext } from '../Component/Assets';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
+import TrackPlayer from 'react-native-track-player';
+
 
 
 const { width: ScreenW, height: ScreenH } = Dimensions.get('window');
@@ -19,7 +21,7 @@ const Home = ({route}) => {
     // console.log('Received recentlyPlayed data in Home:', recentlyPlayed);
     // console.log('Received User data in Home:', userData);
 
-    //Menu List
+    //Menu List==================================================
     const menuItems = [
         { id: 1, title: 'All' },
         { id: 2, title: 'Music' },
@@ -33,7 +35,7 @@ const Home = ({route}) => {
     const [topArtists, setTopArtists] = useState([]);
 
     
-    // Recent Played Song API
+    // Recent Played Song API=============================================
     const getRecentlyPlayedSongs = async () =>{
         const accessToken = await AsyncStorage.getItem('token');
         try {
@@ -57,7 +59,7 @@ const Home = ({route}) => {
 
 
 
-    // Top Mix Song API
+    // Top Mix Song API===============================================
     const getTopmix = async () =>{
         const accessToken = await AsyncStorage.getItem('token');
         try {
@@ -80,7 +82,7 @@ const Home = ({route}) => {
     },[])
 
 
-    // New Song API
+    // New Song API========================================================
     const getNewRelease = async () =>{
         const accessToken = await AsyncStorage.getItem('token');
             try {
@@ -103,7 +105,7 @@ const Home = ({route}) => {
     },[])
 
 
-    // Top Artists API
+    // Top Artists API=====================================================
     useEffect(() => {
         const getTopArtists = async () => {
             try{
@@ -129,9 +131,32 @@ const Home = ({route}) => {
 
     
 
-    const playTrack = () => {
-        
-    }
+    // const playTrack = async (track) => {
+    //     try {
+    //       // Stop the current track if already playing
+    //       await TrackPlayer.stop();
+    //       await TrackPlayer.reset();
+
+    //       if (!track.track.preview_url) {
+    //         throw new Error('Track has no preview URL');
+    //       }
+      
+    //       // Add the new track to the TrackPlayer queue
+    //       await TrackPlayer.add({
+    //         id: track.id,
+    //         url: track.track.preview_url, // Use the track's preview URL or full URL
+    //         title: track.track.name,
+    //         artist: track.track.artists.map((artist) => artist.name).join(', '),
+    //         artwork: track.track.album.images[0].url,
+    //       });
+      
+    //       // Start playing the track
+    //       await TrackPlayer.play();
+    //     } catch (error) {
+    //       console.error('Error playing track:', error);
+    //     }
+    // };
+      
 
 
     // AllUI =================================================================================================
@@ -144,12 +169,12 @@ const Home = ({route}) => {
             </View>
             
             <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{paddingVertical: 2, paddingHorizontal: 20,}}>
-                {recentlyPlayed.map(item => (
-                    <TouchableOpacity key={item.id} style={styles.topHitItem} onPress={() => navigation.navigate('PlayScreen',{recentlyPlayed: item})}>
+                {recentlyPlayed && recentlyPlayed.map((track) => (
+                    <TouchableOpacity key={track.id} style={styles.topHitItem} onPress={() => navigation.navigate('PlayScreen',{ track })}>
                         <View style={styles.topHitContainer}>
                             <View style={styles.topHitLayout}>
                                 <View style={{width: ScreenW * 0.38,height: ScreenH * 0.23,overflow: 'hidden',borderRadius: 30}}>
-                                    <Image source={{uri:item.track.album.images[0].url}} style={{ width: '100%', height: '100%', resizeMode:'cover'}} />
+                                    <Image source={{uri:track.track.album.images[0].url}} style={{ width: '100%', height: '100%', resizeMode:'cover'}} />
                                 </View>
 
                                 {/* Play Icon  */}
@@ -160,8 +185,8 @@ const Home = ({route}) => {
                             
                             {/* PlayList Name & Authors */}
                             <View style={{width: ScreenW * 0.38,}}>
-                                <Text style={{color: 'white',fontWeight: '700', fontSize: ScreenW * 0.033,marginBottom: 0,paddingRight:10, paddingLeft:2}} numberOfLines={2} ellipsizeMode="tail">{item.track.name}</Text>
-                                <Text style={{color: '#aeaeae',fontSize: ScreenW * 0.028, paddingLeft:2}}>{item.track.artists[0].name}</Text>
+                                <Text style={{color: 'white',fontWeight: '700', fontSize: ScreenW * 0.033,marginBottom: 0,paddingRight:10, paddingLeft:2}} numberOfLines={2} ellipsizeMode="tail">{track.track.name}</Text>
+                                <Text style={{color: '#aeaeae',fontSize: ScreenW * 0.028, paddingLeft:2}}>{track.track.artists[0].name}</Text> 
                             </View>
                         </View>
                     </TouchableOpacity>

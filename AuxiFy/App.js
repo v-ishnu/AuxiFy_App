@@ -7,7 +7,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { SplashScreen, RecentlyPlayed, SignupScreen, ProfileEdit, OnboardingScreen, NavBar, PlayScreen, LoginScreen, Profile, Dev, LibraryScreen, SettingScreen, HomeScreen, SignUp, AboutScreen, SignUpInScreen, PreLoader, ArtistProfile,} from './Screen/Component/Assets.js';
 import PlayerProvider from './PlayerContext.js';
 import axios from 'axios';
-
+// import TrackPlayer, {Capability,State, usePlaybackState,useProgress,} from 'react-native-track-player';
 
 
 const Stack = createStackNavigator();
@@ -23,8 +23,13 @@ const AuxiFy = ({props}) => {
   const [recentlyPlayed, setRecentlyPlayed] = useState([]);
   const [isLoggedIn, setIsLogged] = useState(false);
 
+  useEffect(() => {
+    retrieveLoginStatus();
+    fetchToken();
+    getProfile();
+    getRecentlyPlayedSongs();
+  }, []);
 
-  // Retrieve login status
   const retrieveLoginStatus = async () => {
     try {
       const data = await AsyncStorage.getItem('keepLoggedIn');
@@ -34,75 +39,59 @@ const AuxiFy = ({props}) => {
     }
   };
 
-  // Fetching User Data through mongodb
-  useEffect(() => {
-     retrieveLoginStatus();
-    async function fetchToken() {
-      try {
-        const token = await AsyncStorage.getItem('token');
-        // console.log(token);
-        axios
+  const fetchToken = async () => {
+    try {
+      const token = await AsyncStorage.getItem('token');
+      axios
         .post('https://auxify-app.onrender.com/userdata', { token: token })
         .then((res) => {
           setUserData(res.data.data);
-          setLoginType("MongoDB")
+          setLoginType('MongoDB');
         })
         .catch((error) => {
-          console.error("Error fetching user data", error);
+          console.error('Error fetching user data', error);
         });
-      } catch (error) {
-        console.error("Error fetching token", error);
-      }
+    } catch (error) {
+      console.error('Error fetching token', error);
     }
-    fetchToken(); 
-  }, []); 
+  };
 
-  // Spotify Config User
   const getProfile = async () => {
     try {
-        const accessToken = await AsyncStorage.getItem("token"); 
-        const response = await fetch("https://api.spotify.com/v1/me", {
-            headers: {
-                Authorization: `Bearer ${accessToken}`, 
-            },
-        });
+      const accessToken = await AsyncStorage.getItem('token');
+      const response = await fetch('https://api.spotify.com/v1/me', {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
 
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data = await response.json(); 
-        setUserData(data);
-        setLoginType("Spotify");
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const data = await response.json();
+      setUserData(data);
+      setLoginType('Spotify');
     } catch (error) {
-        console.error("Error fetching profile:", error);
+      console.error('Error fetching profile:', error);
     }
-  }
-  useEffect(()=>{
-    getProfile()
-  },[])
+  };
 
-
-  // Recent Played Song
-  const getRecentlyPlayedSongs = async () =>{
+  const getRecentlyPlayedSongs = async () => {
     const accessToken = await AsyncStorage.getItem('token');
     try {
       const response = await axios({
         method: 'GET',
         url: 'https://api.spotify.com/v1/me/player/recently-played?limit=10',
         headers: {
-          Authorization: `Bearer ${accessToken}`, 
-      },
-      })
-      const tracks = response.data.items
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+      const tracks = response.data.items;
       setRecentlyPlayed(tracks);
     } catch (err) {
       console.error(err);
     }
-  }
-
-  useEffect(()=>{
-    getRecentlyPlayedSongs();
-  },[])
+  };
 
   return (
     <Tab.Navigator tabBar={(props) => <NavBar {...props} initialParams= {{recentlyPlayed, userData, loginType, }} />}>
