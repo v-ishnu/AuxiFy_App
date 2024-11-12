@@ -30,15 +30,18 @@ const PlayScreen = ({ route }) => {
 
     const [isPlayerReady, setIsPlayerReady] = useState(false);
 
-    console.log(track);
 
     // Initialize TrackPlayer
     const initializePlayer = async () => {
         try {
-            const state = await TrackPlayer.getState();
-            if (state === State.None) {
-                console.log('Setting up TrackPlayer...');
+            const state = await TrackPlayer.getPlaybackState();
+            console.log('TrackPlayer state before setup:', state);
+    
+            if (state == State.None) {
+                console.log('TrackPlayer is not set up. Initializing...');
                 await TrackPlayer.setupPlayer();
+                console.log('Player setup successful.');
+    
                 await TrackPlayer.updateOptions({
                     capabilities: [
                         Capability.Play,
@@ -47,17 +50,19 @@ const PlayScreen = ({ route }) => {
                         Capability.SkipToPrevious,
                     ],
                 });
-                setIsPlayerReady(true);
-                console.log('TrackPlayer setup complete.');
+                console.log('Player options updated.');
             } else {
                 console.log('TrackPlayer already initialized.');
-                setIsPlayerReady(true);
             }
+    
+            setIsPlayerReady(true); // Mark player as ready
+            console.log('isPlayerReady set to true');
         } catch (error) {
             console.error('Error initializing TrackPlayer:', error);
         }
     };
-
+    
+    
     
 
     // Play a track
@@ -66,13 +71,13 @@ const PlayScreen = ({ route }) => {
             console.error('Player not initialized. Waiting...');
             return;
         }
-
+    
         if (!track || !track.track || !track.track.id) {
             console.error('Invalid track data. Returning to the previous screen.');
             navigation.goBack();
             return;
         }
-
+    
         try {
             console.log('Loading track:', track.track.name);
             await TrackPlayer.reset();
@@ -89,29 +94,24 @@ const PlayScreen = ({ route }) => {
             console.error('Error playing track:', error);
         }
     };
+    
 
     useEffect(() => {
-        const startPlayer = async () => {
-            await initializePlayer();
-            if (track && track.track && track.track.id) {
-                await playTrack(track);
-            }
-        };
-
-        startPlayer();
-
-        return async () => {
-            console.log('Cleaning up TrackPlayer...');
-            try {
-                if (isPlayerReady) {
-                    await TrackPlayer.stop();
-                    await TrackPlayer.destroy();
-                }
-            } catch (error) {
-                console.error('Error during TrackPlayer cleanup:', error);
-            }
-        };
-    }, [track]);    
+        console.log('useEffect triggered');
+        console.log('isPlayerReady:', isPlayerReady);
+        console.log('track data:', JSON.stringify(track, null, 2));
+        initializePlayer();
+    
+        if (isPlayerReady && track && track.track && track.track.id) {
+            console.log('Playing track...');
+            playTrack(track);
+        } else {
+            console.warn('Player not ready or invalid track data');
+        }
+    }, [track, isPlayerReady]);
+    
+    console.log(track)
+    
 
 
     return (

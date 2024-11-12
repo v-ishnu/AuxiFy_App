@@ -127,35 +127,7 @@ const Home = ({route}) => {
             }
         }
         getTopArtists();
-    }, []) 
-
-    
-
-    // const playTrack = async (track) => {
-    //     try {
-    //       // Stop the current track if already playing
-    //       await TrackPlayer.stop();
-    //       await TrackPlayer.reset();
-
-    //       if (!track.track.preview_url) {
-    //         throw new Error('Track has no preview URL');
-    //       }
-      
-    //       // Add the new track to the TrackPlayer queue
-    //       await TrackPlayer.add({
-    //         id: track.id,
-    //         url: track.track.preview_url, // Use the track's preview URL or full URL
-    //         title: track.track.name,
-    //         artist: track.track.artists.map((artist) => artist.name).join(', '),
-    //         artwork: track.track.album.images[0].url,
-    //       });
-      
-    //       // Start playing the track
-    //       await TrackPlayer.play();
-    //     } catch (error) {
-    //       console.error('Error playing track:', error);
-    //     }
-    // };
+    }, [])
       
 
 
